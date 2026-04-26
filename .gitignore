@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Database
+*.db
+
+# CSV outputs
+*.csv
+
+# Env files
+.env
+
+# keep example
+!books_sample.csv
+!summary_sample.csv
