@@ -1,7 +1,10 @@
 from scraper import fetch_page, parse_books
 from database import create_table, insert_books, get_books, get_price_summary
 from pathlib import Path
+from api import show_books, show_price_summary
 import csv
+
+
 
 def main() -> None:
 
@@ -26,7 +29,7 @@ def export_books_to_csv(books):
         print("No books to export!")
         return
     
-    file_path = Path(__file__).parent / "books.csv"
+    file_path = Path(__file__).parent / "books_sample.csv"
 
     field_names = list(books[0].keys())
 
@@ -51,7 +54,7 @@ def print_summary():
 def export_summary_to_csv():
 
     summary_list=[]
-    file_path = Path(__file__).parent / "summary.csv"
+    file_path = Path(__file__).parent / "summary_sample.csv"
 
     summary = get_price_summary()
     if not summary:

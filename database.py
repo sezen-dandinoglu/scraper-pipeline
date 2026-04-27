@@ -41,9 +41,6 @@ def get_books() -> list:
          cursor.execute(select_query)
          data = cursor.fetchall()
          columns = [d[0] for d in cursor.description]
-         print(data[0])
-         print(columns)
-         print(dict(zip(columns, data[0])))
 
          for row in data:
               books_dict = dict(zip(columns, row))

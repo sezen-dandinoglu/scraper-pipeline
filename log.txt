@@ -1,0 +1,12 @@
+20 books processed.
+
+Price Summary:
+Max Price: £57.25
+Min Price: £13.99
+Avg Price: £38.05
+20 books processed.
+
+Price Summary:
+Max Price: £57.25
+Min Price: £13.99
+Avg Price: £38.05

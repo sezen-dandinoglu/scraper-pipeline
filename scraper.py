@@ -28,7 +28,6 @@ def parse_books(html) -> list:
     soup = BeautifulSoup(html, 'html.parser')
 
     rows = soup.find_all('article', class_='product_pod')
-    print(len(rows))
     
     for row in rows:
         
