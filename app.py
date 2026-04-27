@@ -4,7 +4,7 @@ from main import main
 
 app = FastAPI()
 
-@app.on_evemt("startup")
+@app.on_event("startup")
 def startup():
     create_table()
     main()

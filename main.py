@@ -1,7 +1,6 @@
 from scraper import fetch_page, parse_books
 from database import create_table, insert_books, get_books, get_price_summary
 from pathlib import Path
-from api import show_books, show_price_summary
 import csv
 
 
