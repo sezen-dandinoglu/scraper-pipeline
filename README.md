@@ -47,6 +47,8 @@ Example response:
   "avg_price": 38.05
 }
 
+---
+
 🐳 Docker
 
 Build the image:
@@ -60,14 +62,23 @@ docker run -p 8000:8000 scraper-pipeline-api
 Access:
 
 http://localhost:8000/docs
+
+---
+
 ⚙️ Local Setup
 pip install -r requirements.txt
 uvicorn app:app --reload
+
+---
+
 ⏰ Scheduler
 
 The pipeline is automated using cron:
 
-*/10 * * * * python main.py
+* 9 * * * python main.py
+
+---
+
 📂 Project Structure
 .
 ├── app.py
@@ -80,9 +91,12 @@ The pipeline is automated using cron:
 ├── books_sample.csv
 ├── summary_sample.csv
 
+---
 
 🌐 Live Demo
 https://scraper-pipeline.onrender.com/docs
+
+---
 
 🧠 What I Learned
 Building end-to-end data pipelines
@@ -91,6 +105,8 @@ Working with SQLite and SQL aggregation
 Automating tasks with cron
 Containerization with Docker
 Deploying services to the cloud
+
+---
 
 📌 Notes
 SQLite is used for simplicity
