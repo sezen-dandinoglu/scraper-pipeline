@@ -24,6 +24,9 @@ venv/
 # Env files
 .env
 
+# log files
+log.txt
+
 # keep example
 !books_sample.csv
 !summary_sample.csv
