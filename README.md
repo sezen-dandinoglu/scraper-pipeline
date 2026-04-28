@@ -1,4 +1,4 @@
-# 📚 Book Data Pipeline & API
+## 📚 Book Data Pipeline & API
 
 This project is an end-to-end data pipeline and API service built with Python.
 
@@ -6,7 +6,7 @@ This project is an end-to-end data pipeline and API service built with Python.
 
 - Web scraping using BeautifulSoup
 - Data cleaning and transformation
-- SQLite database with deduplication logic
+- SQLite and PostgreSQL databases with deduplication logic
 - Automated scheduling using cron
 - REST API built with FastAPI
 - CSV export for reporting
@@ -15,14 +15,47 @@ This project is an end-to-end data pipeline and API service built with Python.
 
 ---
 
-## 🏗️ Architecture
+## Database Support
 
-Scraper → Data Cleaning → SQLite DB → API (FastAPI)
-↓
-CSV Export
-↓
-Scheduler (cron)
+This project supports both SQLite and PostgreSQL database backends.
 
+- `database_sqlite.py` is used for local learning and lightweight development.
+- `database_postgres.py` is used for production-like usage with PostgreSQL.
+- Environment variables are managed with `.env`.
+
+Required environment variable:
+
+```env
+DATABASE_URL=postgresql://username:password@host/dbname
+
+.env is ignored by Git for security.
+
+---
+
+## Automation & Logs
+
+The pipeline can be scheduled locally using cron.
+
+Runtime logs are written to `log.txt`, but this file is ignored by Git because it is generated locally and may contain environment-specific information.
+
+---
+
+## 📐 Updated Architecture
+
+```text
+Scraper
+  ↓
+Data Cleaning
+  ↓
+SQLite / PostgreSQL
+  ↓
+Deduplication
+  ↓
+Analytics
+  ↓
+CSV Export + FastAPI
+  ↓
+Render / Docker
 
 ---
 
