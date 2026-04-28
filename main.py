@@ -1,5 +1,6 @@
 from scraper import fetch_page, parse_books
-from database import create_table, insert_books, get_books, get_price_summary
+# from database_sqlite import create_table, insert_books, get_books, get_price_summary
+from database_postgres import create_table, insert_books, get_books, get_price_summary
 from pathlib import Path
 import csv
 
@@ -71,5 +72,7 @@ def export_summary_to_csv():
         writer.writerows(summary_list)
 
 if __name__ == "__main__":
-    
+    # conn = get_connection()
+    # print("PostgreSQL connection OK")
+    # conn.close()
     main()
