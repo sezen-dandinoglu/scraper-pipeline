@@ -60,7 +60,6 @@ def get_books() -> list:
 
     return books     
 
-
 def get_average_rating() -> float | None:
      
     query = """SELECT AVG(rating) FROM books;"""
@@ -89,7 +88,6 @@ def get_max_price() -> float | None:
     
     return max_price
           
-
 def get_min_price() -> float | None:
      
     min_price = None
@@ -137,3 +135,57 @@ def get_price_summary() ->  dict | None:
         "min_price": round(row[1], 2) if row[1] is not None else None,
         "avg_price": round(row[2], 2) if row[2] is not None else None,
     }
+
+def get_books_filtered(
+    rating: int | None = None,
+    price_min: float | None = None,
+    price_max: float | None = None,
+    page: int | None = None,
+    limit: int | None = None,
+    sort: str | None = None
+) -> list:
+
+    conditions = []
+    params = []
+    result = []
+    query = "SELECT * FROM books"
+    allowed_sort_options={"price_asc": "price ASC",
+                          "price_desc": "price DESC",
+                          "rating_asc": "rating ASC",
+                          "rating_desc": "rating DESC"}
+
+    if rating is not None:
+        conditions.append("rating = %s")
+        params.append(rating)
+
+    if price_min is not None:
+        conditions.append("price >= %s")
+        params.append(price_min)
+
+    if price_max is not None:
+        conditions.append("price <= %s")
+        params.append(price_max)  
+
+    if conditions:
+        query += " WHERE " + " AND ".join(conditions)
+
+    if sort in allowed_sort_options:
+        query += " ORDER BY " + allowed_sort_options[sort]
+
+    if page is not None and limit is not None:
+        offset = (page - 1) * limit
+        query += " LIMIT %s OFFSET %s"
+        params.append(limit)
+        params.append(offset)      
+
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(query, tuple(params))
+            rows = cursor.fetchall()
+            columns = [d[0] for d in cursor.description]
+
+            for row in rows:
+                books_dict = dict(zip(columns, row))
+                result.append(books_dict)
+    
+    return result

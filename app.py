@@ -1,5 +1,6 @@
-from database_sqlite import get_books, get_price_summary, create_table
-from fastapi import FastAPI, HTTPException, status
+# from database_sqlite import get_books, get_price_summary, create_table
+from database_postgres import get_books_filtered, get_price_summary, create_table
+from fastapi import FastAPI, HTTPException, status, Query
 from main import main
 
 app = FastAPI()
@@ -9,12 +10,9 @@ def startup():
     create_table()
     main()
 
-@app.get("/books")
-def show_books() -> list:
-    
-    books = get_books()
-    
-    return books
+@app.get("/health")
+def health():
+    return{"status": "ok"}    
 
 @app.get("/summary")
 def show_price_summary() -> dict:
@@ -27,3 +25,17 @@ def show_price_summary() -> dict:
             detail="No summary data available")
 
     return summary
+
+@app.get("/books")
+def show_books_filtered(
+    rating: int | None = None,
+    price_min: float | None = None,
+    price_max: float | None = None,
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1, le=100),
+    sort: str | None = None
+) -> list:
+    
+    filtered_books = get_books_filtered(rating, price_min, price_max, page, limit, sort)
+    
+    return filtered_books

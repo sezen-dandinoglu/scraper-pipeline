@@ -12,6 +12,7 @@ This project is an end-to-end data pipeline and API service built with Python.
 - CSV export for reporting
 - Dockerized for portability
 - Deployed to cloud (Render)
+- Supports filtering, pagination and sorting via query parameters
 
 ---
 
